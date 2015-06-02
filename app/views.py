@@ -1,5 +1,7 @@
+from flask import render_template 
 from app import app
 
 @app.route('/')
 def index():
-    return "Hello, CTY 2015!"
+    return render_template("base.html",body="Welcome to FCPS at CTY 2015.",\
+                           name="Michael")
