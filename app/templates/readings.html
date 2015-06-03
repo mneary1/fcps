@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+{% for reading in readings %}
+<a href= {{reading.url}}>{{reading}}</a>
+{% endfor %}
+{% endblock %}
