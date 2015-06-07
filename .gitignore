@@ -1,3 +1,8 @@
 *~
 *.pyc
 *__pycache__*
+tmp
+db_repository
+config.py 
+db_*
+app.db
