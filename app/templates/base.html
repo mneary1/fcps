@@ -2,13 +2,18 @@
     <title> FCPS 2015 </title>
     <body>
     <div>FCPS: <a href="/home">Home</a></div>
-    <div><a href="/login">sign in here</a></div>
+    {% if not current_user.is_authenticated() %}
+    <div><a href="/login">login here</a></div>
+    {% else %}
+    <div><a href="/logout">log out here</a></div>
+    <p>Hi, {{ current_user.username }} </p>
+    {% endif %}
     {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul>
             {% for message in messages %}
                 <li> {{ message }} </li>
-            {% endfor%}  
+            {% endfor %}  
         </ul>     
         {% endif %}
     {% endwith %}
