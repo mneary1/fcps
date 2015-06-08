@@ -12,6 +12,3 @@ class UploadForm(Form):
 	upload = FileField('File to be uploaded', validators=[FileRequired(),FileAllowed(app.config['ALLOWED_EXTENSIONS'],"not allowed")])
 	submit = SubmitField("Upload")
 
-	def vaildate_upload(form, field):
-		return "." in field.name
-

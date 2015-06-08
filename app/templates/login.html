@@ -3,6 +3,7 @@
 {% block content %}
 	<h1> Login </h1>
 	<form action="" method="post" name="login">
+		{% endif %}
 		{{ form.hidden_tag() }}
 		<p>
 			Username: {{ form.username(size=25) }}
