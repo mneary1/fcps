@@ -5,7 +5,8 @@
     {% if not current_user.is_authenticated() %}
     <div><a href="/login">login here</a></div>
     {% else %}
-    <div><a href="/logout">log out here</a></div>
+    <div><a href="/upload">upload a file</a></div>
+    <div><a href="/logout">log out</a></div>
     <p>Hi, {{ current_user.username }} </p>
     {% endif %}
     {% with messages = get_flashed_messages() %}
