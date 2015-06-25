@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request
+from flask import render_template, flash, redirect, session, url_for, request, send_from_directory
 from flask.ext.login import login_user, logout_user, current_user, login_required 
 from app import app, db, lm
 from werkzeug import secure_filename
@@ -7,12 +7,13 @@ from .models import User
 
 import os
 
+''' routes '''
 @app.route('/')
-@app.route('/home')
+@app.route('/home/')
 def index():
     return render_template("base.html")
 
-@app.route('/login',methods=['GET','POST'])
+@app.route('/login/',methods=['GET','POST'])
 def login():
 	form = LoginForm()
 
@@ -35,7 +36,7 @@ def login():
 	return render_template("login.html", form=form)
 
 
-@app.route("/logout")
+@app.route("/logout/")
 @login_required
 def logout():
 	logout_user()
@@ -46,7 +47,7 @@ def logout():
 def load_user(id):
 	return User.query.get(int(id))
 
-@app.route('/upload',methods=['GET','POST'])
+@app.route('/upload/',methods=['GET','POST'])
 @login_required
 def upload():
 	form = UploadForm()
@@ -70,6 +71,26 @@ def upload():
 
 	return render_template("upload.html",form=form)
 
+@app.route("/readings/")
+def readings():
+
+	path = app.config["READINGS_PATH"]
+	potential_readings = os.listdir(path)
+	actual_readings = []
+
+	for reading in potential_readings:
+		if os.path.isfile(os.path.join(path,reading)):
+			actual_readings.append(reading)
+
+	return render_template("readings.html", readings=actual_readings)
+	
+	#return send_from_directory(app.config["READINGS_PATH"], "Encryption methods.pdf")
+
+@app.route("/readings/<path:reading>")
+def send_reading(reading):
+	return send_from_directory(app.config["READINGS_PATH"], reading)
+
+''' error handlers '''
 @app.errorhandler(404)
 def page_not_found(error):
 	return render_template("404.html"), 404

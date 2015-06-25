@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-{% for reading in readings %}
-<a href= {{reading.url}}>{{reading}}</a>
-{% endfor %}
+<div class="container">
+	<table class="table table-hover">
+		{% for reading in readings %}
+			<tr>
+				<td><a href="/readings/{{reading}}" >{{reading}}</a></td>
+			</tr>
+		{% endfor %}
+	</table>
+</div>
 {% endblock %}
