@@ -6,3 +6,4 @@ db_repository
 config.py 
 db_*
 app.db
+readings
