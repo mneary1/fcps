@@ -65,10 +65,6 @@ def upload():
 		flash("uploaded to " + full_path)
 		return redirect("/")
 
-	else:
-		print("oops")
-		
-
 	return render_template("upload.html",form=form)
 
 @app.route("/readings/")
@@ -83,9 +79,8 @@ def readings():
 			actual_readings.append(reading)
 
 	return render_template("readings.html", readings=actual_readings)
-	
-	#return send_from_directory(app.config["READINGS_PATH"], "Encryption methods.pdf")
 
+#serves up a specific reading requested
 @app.route("/readings/<path:reading>")
 def send_reading(reading):
 	return send_from_directory(app.config["READINGS_PATH"], reading)
