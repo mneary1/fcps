@@ -66,8 +66,15 @@ def upload():
 
 	else:
 		print("oops")
-
 		
 
 	return render_template("upload.html",form=form)
+
+@app.errorhandler(404)
+def page_not_found(error):
+	return render_template("404.html"), 404
+
+@app.errorhandler(500)
+def server_error(error):
+	return "Something bad happened and you should tell Michael to look into it"
 
