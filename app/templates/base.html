@@ -1,24 +1,44 @@
-<html>
-    <title> FCPS 2015 </title>
-    <body>
-    <div>FCPS: <a href="/home">Home</a></div>
-    {% if not current_user.is_authenticated() %}
-    <div><a href="/login">login here</a></div>
-    {% else %}
-    <div><a href="/upload">upload a file</a></div>
-    <div><a href="/logout">log out</a></div>
-    <p>Hi, {{ current_user.username }} </p>
-    {% endif %}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li> {{ message }} </li>
-            {% endfor %}  
-        </ul>     
-        {% endif %}
-    {% endwith %}
-    <hr>
-    {% block content %} {% endblock %}
-    </body>
-</html>
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+    <link rel="stylesheet" href="{{url_for('.static', filename='base.css')}}">
+{% endblock %}
+
+{% block title %}FCPS Seattle 2015{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/home">FCPS</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                {% if current_user.is_authenticated() %}
+                <li> 
+                    <a href="/logout">Logout</a> 
+                </li>
+                <li {%if request.path == "/upload"%}class="active"{%endif%}>
+                    <a href="/upload">Upload</a>
+                </li>
+                <li {%if request.path == "/resources"%}class="active"{%endif%}>
+                    <a href="/resoruces">Resources</a> 
+                </li>
+                {%else%}
+                <li {%if request.path == "/login"%}class="active"{%endif%}> 
+                    <a href="/login"> Login </a> 
+                </li>
+                {%endif%}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron container" id="welcome">
+    <h1> FCPS 2015 </h1> 
+
+</div>
+{% endblock %}

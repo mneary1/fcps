@@ -1,0 +1,21 @@
+body {
+  font-family: monospace;
+  padding: 10px;
+}
+
+form {
+  display: inline-block;
+  border-radius: 25px;
+  border: 1px solid black;
+  padding: 20px;
+  margin-left: 40%
+}
+
+form #submit {
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+#welcome {
+	text-align: center;
+}

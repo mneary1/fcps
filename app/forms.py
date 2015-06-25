@@ -7,6 +7,7 @@ from app import app
 class LoginForm(Form):
     username = StringField('username', validators=[DataRequired()])
     password = StringField('password', validators=[DataRequired()])
+    submit = SubmitField("Login")
 
 class UploadForm(Form):
 	upload = FileField('File to be uploaded', validators=[FileRequired(),FileAllowed(app.config['ALLOWED_EXTENSIONS'],"not allowed")])
