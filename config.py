@@ -9,4 +9,4 @@ WTF_CSRF_ENABLED = True
 SECRET_KEY = 'supersecretkey'
 
 ALLOWED_EXTENSIONS = ['docx','doc','pdf','txt','py','jpg','png','jpeg','gif']
-UPLOAD_PATH = os.path.join(basedir, 'static')
+UPLOAD_PATH = os.path.join(basedir, 'uploads')

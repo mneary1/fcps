@@ -6,16 +6,16 @@ body {
 form {
   display: inline-block;
   border-radius: 25px;
-  border: 1px solid black;
+  border: 2px solid black;
   padding: 20px;
   margin-left: 40%
 }
 
 form #submit {
-  margin-left: 30%;
-  margin-right: 30%;
+	float: right;
 }
 
 #welcome {
 	text-align: center;
 }
+

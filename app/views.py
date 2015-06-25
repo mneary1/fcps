@@ -62,8 +62,12 @@ def upload():
 		full_path = os.path.join(full_path, filename)
 		form.upload.data.save(full_path)
 		flash("uploaded to " + full_path)
-		
 		return redirect("/")
+
+	else:
+		print("oops")
+
+		
 
 	return render_template("upload.html",form=form)
 
