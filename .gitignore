@@ -7,3 +7,6 @@ config.py
 db_*
 app.db
 readings
+fcps-site-env
+uploads
+
