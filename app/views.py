@@ -27,9 +27,9 @@ def login():
 
 		if user is not None:
 			login_user(user)
-			flash("Login successful!")
+			flash("Login successful!", "success")
 		else:
-			print("Can't login: user", form.username.data, "doesn't exist.")
+			flash("User " +  form.username.data + " doesn't exist.", "error")
 
 		return redirect('/')
 
@@ -40,7 +40,7 @@ def login():
 @login_required
 def logout():
 	logout_user()
-	flash("logout successful")
+	flash("Logout successful!", 'success')
 	return redirect('/')
 
 @lm.user_loader
@@ -62,7 +62,7 @@ def upload():
 
 		full_path = os.path.join(full_path, filename)
 		form.upload.data.save(full_path)
-		flash("uploaded to " + full_path)
+		flash("successfully uploaded " + filename )
 		return redirect("/")
 
 	return render_template("upload.html",form=form)

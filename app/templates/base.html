@@ -37,7 +37,22 @@
 {% endblock %}
 
 {% block content %}
+<div>
+   {%with messages=get_flashed_messages(with_categories=true)%}
+   {%if messages%}
+   {%for category, message in messages%}
+   {%if category == 'error'%}
+   <div class="alert alert-danger" role="alert">{{message}}</div>
+   {%elif category == 'success'%}
+   <div class="alert alert-success" role="alert">{{message}}</div>
+   {%endif%}
+   {%endfor%}
+   {%endif%}
+   {%endwith%}
+</div>
 <div class="jumbotron container" id="welcome">
     <h1> FCPS 2015 </h1> 
+    <p>Welcome to Fundamentals of Computer Science at CTY Seattle!</p>
+    <p>Ready to have some fun?</p>
 </div>
 {% endblock %}
