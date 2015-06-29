@@ -76,7 +76,9 @@ def readings():
 
 	for reading in potential_readings:
 		if os.path.isfile(os.path.join(path,reading)):
-			actual_readings.append(reading)
+                    actual_readings.append(reading)
+
+        actual_readings.sort()
 
 	return render_template("readings.html", readings=actual_readings)
 
