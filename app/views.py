@@ -31,7 +31,7 @@ def login():
 		else:
 			flash("Incorrect login credentials :(", "error")
 
-		return redirect('/')
+		return redirect('/login')
 
 	return render_template("login.html", form=form)
 
