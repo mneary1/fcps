@@ -23,15 +23,15 @@ def login():
 	
 	if form.validate_on_submit():
 		print('Login requested for user: %s pass: %s ' % (form.username.data, form.password.data) )
-		user = User.query.filter_by(username = form.username.data).first()
-
+		user = User.query.filter_by(username = form.username.data, password=form.password.data).first()
+		print(user)
 		if user is not None:
 			login_user(user)
 			flash("Login successful!", "success")
 		else:
-			flash("User " +  form.username.data + " doesn't exist.", "error")
+			flash("Incorrect login credentials :(", "error")
 
-		return redirect('/')
+		return redirect('/login')
 
 	return render_template("login.html", form=form)
 
