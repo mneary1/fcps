@@ -3,10 +3,9 @@
 *__pycache__*
 tmp
 db_repository
-config.py 
 db_*
 app.db
 readings
 fcps-site-env
 uploads
-
+config*
