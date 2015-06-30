@@ -52,8 +52,10 @@ def load_user(id):
 def upload():
     form = UploadForm()
  
+    '''
     if form.validate_on_submit():
         filename = secure_filename(form.upload.data.filename)
+        
         full_path = os.path.join(app.config['UPLOAD_PATH'],current_user.username)
 
         #make the user's upload directory if it doesn't exist
@@ -64,7 +66,28 @@ def upload():
         form.upload.data.save(full_path)
         flash("successfully uploaded " + filename, "success")
         return redirect("/")
+    '''
+    if request.method == 'POST':
+        filename = secure_filename(form.upload.data.filename)
+        if filename:
+            ext = filename.split(".")[1]
+            if ext not in app.config["ALLOWED_EXTENSIONS"]:
+                flash("file extension ." + ext + " is not a supported upload type", "error")
+                return redirect("/upload")
+            full_path = os.path.join(app.config['UPLOAD_PATH'],current_user.username)
 
+            #make the user's upload directory if it doesn't exist
+            if not os.path.exists(full_path):
+                os.makedirs(full_path)
+
+            full_path = os.path.join(full_path, filename)
+            form.upload.data.save(full_path)
+            flash("successfully uploaded " + filename, "success")
+            return redirect("/")
+        else:
+            flash("no file chosen","error")
+            return redirect("/upload")
+    
     return render_template("upload.html",form=form)
 
 @app.route("/readings/")
