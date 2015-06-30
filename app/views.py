@@ -69,7 +69,7 @@ def upload():
     '''
     if request.method == 'POST':
         filename = secure_filename(form.upload.data.filename)
-        if filename:
+        if filename and "." in filename:
             ext = filename.split(".")[1]
             if ext not in app.config["ALLOWED_EXTENSIONS"]:
                 flash("file extension ." + ext + " is not a supported upload type", "error")
