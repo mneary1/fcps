@@ -10,4 +10,4 @@ SECRET_KEY = 'supersecretkey'
 
 ALLOWED_EXTENSIONS = ['docx','doc','pdf','txt','py','jpg','png','jpeg','gif']
 UPLOAD_PATH = os.path.join(basedir, 'uploads')
-READINGS_PATH = os.path.join(basedir,"app","static","day1")
+READINGS_PATH = os.path.join(basedir,"app","static","readings")

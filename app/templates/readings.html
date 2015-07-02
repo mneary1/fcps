@@ -1,12 +1,43 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-	<table class="table table-hover">
-		{% for reading in readings %}
-			<tr>
-				<td><a href="/readings/{{reading}}" >{{reading}}</a></td>
-			</tr>
-		{% endfor %}
-	</table>
+	<div class="row">
+		<div class="col-md-4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="reading-header">Mandatory</th>
+					</tr>
+				</thead>
+				{%for reading in mandatory%}
+					<tr><td><a href="mandatory/{{reading}}">{{reading}}</a></td></tr>
+				{%endfor%}
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="reading-header">Review</th>
+					</tr>
+				</thead>
+				{%for reading in review%}
+					<tr><td><a href="review/{{reading}}">{{reading}}</a></td></tr>
+				{%endfor%}
+			</table>
+		</div>
+		<div class="col-md-4">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="reading-header">Miscellaneous</th>
+					</tr>
+				</thead>
+				{%for reading in misc%}
+					<tr><td><a href="misc/{{reading}}">{{reading}}</a></td></tr>
+				{%endfor%}
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock %}

@@ -18,13 +18,12 @@ def login():
     form = LoginForm()
 
     if current_user.is_authenticated():
-        flash("you're already logged in, " + current_user.username + "!")
+        flash("You're already logged in, " + current_user.username + "!")
         return redirect('/')
     
     if form.validate_on_submit():
-        print('Login requested for user: %s pass: %s ' % (form.username.data, form.password.data) )
         user = User.query.filter_by(username = form.username.data, password=form.password.data).first()
-        print(user)
+
         if user is not None:
             login_user(user)
             flash("Login successful!", "success")
@@ -52,21 +51,6 @@ def load_user(id):
 def upload():
     form = UploadForm()
  
-    '''
-    if form.validate_on_submit():
-        filename = secure_filename(form.upload.data.filename)
-        
-        full_path = os.path.join(app.config['UPLOAD_PATH'],current_user.username)
-
-        #make the user's upload directory if it doesn't exist
-        if not os.path.exists(full_path):
-            os.makedirs(full_path)
-
-        full_path = os.path.join(full_path, filename)
-        form.upload.data.save(full_path)
-        flash("successfully uploaded " + filename, "success")
-        return redirect("/")
-    '''
     if request.method == 'POST':
         filename = secure_filename(form.upload.data.filename)
         if filename and "." in filename:
@@ -94,19 +78,38 @@ def upload():
 def readings():
 
     path = app.config["READINGS_PATH"]
-    potential_readings = os.listdir(path)
-    actual_readings = []
+    all_mandatory = os.listdir(os.path.join(path,"mandatory"))
+    all_review = os.listdir(os.path.join(path,"review"))
+    all_misc = os.listdir(os.path.join(path,"misc"))
+    mandatory = []
+    review = []
+    misc = []
 
-    for reading in potential_readings:
-        if os.path.isfile(os.path.join(path,reading)):
-                    actual_readings.append(reading)
-        actual_readings.sort()
-    return render_template("readings.html", readings=actual_readings)
+    for reading in all_mandatory:
+        if os.path.isfile(os.path.join(path,"mandatory",reading)):
+                    mandatory.append(reading)
+    mandatory.sort()
+
+    for reading in all_review:
+        if os.path.isfile(os.path.join(path,"review",reading)):
+            review.append(reading)
+    review.sort()
+
+    for reading in all_misc:
+        if os.path.isfile(os.path.join(path,"misc",reading)):
+            misc.append(reading)
+    misc.sort()
+
+    return render_template("readings.html", mandatory=mandatory, review=review, misc=misc)
 
 #serves up a specific reading requested
-@app.route("/readings/<path:reading>")
-def send_reading(reading):
-    return send_from_directory(app.config["READINGS_PATH"], reading)
+@app.route("/readings/<type>/<path:reading>")
+def send_reading(reading, type):
+    path = os.path.join(app.config["READINGS_PATH"],type)
+    print(os.path.exists(path))
+    if os.path.exists(path):
+        return send_from_directory(path, reading)
+    return redirect("404.html")
 
 ''' error handlers '''
 @app.errorhandler(404)
