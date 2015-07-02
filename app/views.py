@@ -137,6 +137,25 @@ def send_assignment(assignment, type):
         return send_from_directory(path,assignment)
     return abort(404)
 
+@app.route("/references/")
+def references():
+    #references = get_files(os.path.join(app.config["REFERENCES"]))
+    all_references = os.listdir(app.config["REFERENCES_PATH"])
+    print(all_references)
+    references = []
+    for reference in all_references:
+        if os.path.isfile(os.path.join(app.config["REFERENCES_PATH"], reference)):
+            references.append(reference)
+    references.sort()
+
+    return render_template("references.html", references=references)
+
+@app.route("/references/<path:reference>")
+def send_references(reference):
+    if os.path.exists(app.config["REFERENCES_PATH"]):
+        return send_from_directory(app.config["REFERENCES_PATH"],reference)
+    return abort(404)
+
 ''' error handlers '''
 @app.errorhandler(404)
 def page_not_found(error):
@@ -146,3 +165,6 @@ def page_not_found(error):
 def server_error(error):
     return "Something bad happened and you should tell Michael to look into it"
 
+'''helper functions'''
+def get_files(path):
+    pass

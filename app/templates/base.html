@@ -22,14 +22,17 @@
                 <li> 
                     <a href="/logout">Logout</a> 
                 </li>
-                <li {%if request.path == "/upload"%}class="active"{%endif%}>
+                <li {%if request.path == "/upload/"%}class="active"{%endif%}>
                     <a href="/upload">Upload</a>
                 </li>
-                <li {%if request.path == "/readings"%}class="active"{%endif%}>
+                <li {%if request.path == "/readings/"%}class="active"{%endif%}>
                     <a href="/readings">Readings</a> 
                 </li>
-                <li {%if request.path == "/assignments"%}class="active"{%endif%}>
+                <li {%if request.path == "/assignments/"%}class="active"{%endif%}>
                     <a href="/assignments">Assignments</a>
+                </li>
+                <li {%if request.path == "/references/"%}class="active"{%endif%}>
+                    <a href="/references">References</a>
                 </li>
                 {%else%}
                 <li {%if request.path == "/login"%}class="active"{%endif%}> 

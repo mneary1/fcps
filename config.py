@@ -12,3 +12,4 @@ ALLOWED_EXTENSIONS = ['docx','doc','pdf','txt','py','jpg','png','jpeg','gif']
 UPLOAD_PATH = os.path.join(basedir, 'uploads')
 READINGS_PATH = os.path.join(basedir,"app","static","readings")
 ASSIGNMENTS_PATH = os.path.join(basedir,"app","static","assignments")
+REFERENCES_PATH = os.path.join(basedir,"app","static","references")
