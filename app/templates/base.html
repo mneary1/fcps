@@ -28,6 +28,9 @@
                 <li {%if request.path == "/readings"%}class="active"{%endif%}>
                     <a href="/readings">Readings</a> 
                 </li>
+                <li {%if request.path == "/assignments"%}class="active"{%endif%}>
+                    <a href="/assignments">Assignments</a>
+                </li>
                 {%else%}
                 <li {%if request.path == "/login"%}class="active"{%endif%}> 
                     <a href="/login"> Login </a> 
@@ -41,7 +44,6 @@
 {%with messages=get_flashed_messages(with_categories=true)%}
      {%if messages%}
 <div>
-   
        {%for category, message in messages%}
          {%if category == 'error'%}
             <div class="alert alert-danger" role="alert">{{message}}</div>

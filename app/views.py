@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, session, url_for, request, send_from_directory
+from flask import render_template, flash, redirect, session, url_for, request, send_from_directory, abort
 from flask.ext.login import login_user, logout_user, current_user, login_required 
 from app import app, db, lm
 from werkzeug import secure_filename
@@ -106,10 +106,36 @@ def readings():
 @app.route("/readings/<type>/<path:reading>")
 def send_reading(reading, type):
     path = os.path.join(app.config["READINGS_PATH"],type)
-    print(os.path.exists(path))
     if os.path.exists(path):
         return send_from_directory(path, reading)
-    return redirect("404.html")
+    return abort(404)
+
+@app.route("/assignments/")
+def assignments():
+    path = app.config["ASSIGNMENTS_PATH"]
+    all_programs = os.listdir(os.path.join(path, "programs"))
+    all_activities = os.listdir(os.path.join(path, "activities"))
+    programs = []
+    activities = []
+
+    for program in all_programs:
+        if os.path.isfile(os.path.join(path, "programs", program)):
+            programs.append(program)
+    programs.sort()
+
+    for activity in all_activities:
+        if os.path.isfile(os.path.join(path, "activities", activity)):
+            activities.append(activity)
+    activities.sort()
+
+    return render_template("assignments.html", programs=programs, activities=activities)
+
+@app.route("/assignments/<type>/<path:assignment>")
+def send_assignment(assignment, type):
+    path = os.path.join(app.config["ASSIGNMENTS_PATH"],type)
+    if os.path.exists(path):
+        return send_from_directory(path,assignment)
+    return abort(404)
 
 ''' error handlers '''
 @app.errorhandler(404)

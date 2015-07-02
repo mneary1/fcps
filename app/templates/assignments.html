@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<table class="table table-hover">
+				<thead>
+					<th>
+						Activities
+					</th>
+				</thead>
+				{% for activity in activities %}
+				<tr><td><a href="activities/{{activity}}">{{activity}}</a></td></tr>
+				{% endfor%}
+			</table>
+		</div>
+		<div class="col-md-6">
+			<table class="table table-hover">
+				<thead>
+					<th>
+						Programming
+					</th>
+				</thead>
+				{% for program in programs %}
+				<tr><td><a href="programs/{{program}}">{{program}}</a></td></tr>
+				{% endfor %}
+			</table>
+		</div>	
+	</div>
+</div>
+{% endblock %}
