@@ -10,6 +10,6 @@ class LoginForm(Form):
     submit = SubmitField("Login")
 
 class UploadForm(Form):
-	upload = FileField('File to be uploaded', validators=[FileRequired(),FileAllowed(app.config['ALLOWED_EXTENSIONS'],"not allowed")])
+	upload = FileField('Upload a file:', validators=[FileRequired(),FileAllowed(app.config['ALLOWED_EXTENSIONS'],"not allowed")])
 	submit = SubmitField("Upload")
 

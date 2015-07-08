@@ -72,7 +72,8 @@ def upload():
             flash("no file chosen","error")
             return redirect("/upload")
     
-    return render_template("upload.html",form=form)
+    uploads = get_files(app.config['UPLOAD_PATH'], current_user.username)
+    return render_template("upload.html",form=form, uploads=uploads)
 
 @app.route("/readings/")
 def readings():
