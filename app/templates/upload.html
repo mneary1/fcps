@@ -7,9 +7,13 @@
 			<table class="table table-hover">
 				<thead><th>Things you've uploaded:</th></thead>
 				<tbody>
+				{%if uploads%}
 				{%for upload in uploads%}
 				<tr><td>{{upload}}</td></tr>
 				{%endfor%}
+				{%else%}
+				<tr><td>Nothing yet... you better get to work!</td></tr>
+				{%endif%}
 				</tbody>
 			</table>
 		</div>
