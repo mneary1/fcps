@@ -126,11 +126,16 @@ def server_error(error):
 
 '''helper functions'''
 def get_files(base_path, child=''):
-    all_files = os.listdir(os.path.join(base_path,child))
+    full_path = os.path.join(base_path,child)
+
+    if not os.path.exists(full_path):
+        return []
+
+    all_files = os.listdir(full_path)
     actual_files = []
 
     for potential_file in all_files:
-        if os.path.isfile(os.path.join(base_path,child,potential_file)):
+        if os.path.isfile(os.path.join(full_path,potential_file)):
             actual_files.append(potential_file)
 
     actual_files.sort()
