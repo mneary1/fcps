@@ -76,30 +76,10 @@ def upload():
 
 @app.route("/readings/")
 def readings():
-
     path = app.config["READINGS_PATH"]
-    all_mandatory = os.listdir(os.path.join(path,"mandatory"))
-    all_review = os.listdir(os.path.join(path,"review"))
-    all_misc = os.listdir(os.path.join(path,"misc"))
-    mandatory = []
-    review = []
-    misc = []
-
-    for reading in all_mandatory:
-        if os.path.isfile(os.path.join(path,"mandatory",reading)):
-                    mandatory.append(reading)
-    mandatory.sort()
-
-    for reading in all_review:
-        if os.path.isfile(os.path.join(path,"review",reading)):
-            review.append(reading)
-    review.sort()
-
-    for reading in all_misc:
-        if os.path.isfile(os.path.join(path,"misc",reading)):
-            misc.append(reading)
-    misc.sort()
-
+    mandatory = get_files(path, "mandatory")
+    review = get_files(path, "review")
+    misc = get_files(path, "misc")
     return render_template("readings.html", mandatory=mandatory, review=review, misc=misc)
 
 #serves up a specific reading requested
@@ -113,21 +93,8 @@ def send_reading(reading, type):
 @app.route("/assignments/")
 def assignments():
     path = app.config["ASSIGNMENTS_PATH"]
-    all_programs = os.listdir(os.path.join(path, "programs"))
-    all_activities = os.listdir(os.path.join(path, "activities"))
-    programs = []
-    activities = []
-
-    for program in all_programs:
-        if os.path.isfile(os.path.join(path, "programs", program)):
-            programs.append(program)
-    programs.sort()
-
-    for activity in all_activities:
-        if os.path.isfile(os.path.join(path, "activities", activity)):
-            activities.append(activity)
-    activities.sort()
-
+    programs = get_files(path, "programs")
+    activities = get_files(path, "activities")
     return render_template("assignments.html", programs=programs, activities=activities)
 
 @app.route("/assignments/<type>/<path:assignment>")
@@ -139,15 +106,7 @@ def send_assignment(assignment, type):
 
 @app.route("/references/")
 def references():
-    #references = get_files(os.path.join(app.config["REFERENCES"]))
-    all_references = os.listdir(app.config["REFERENCES_PATH"])
-    print(all_references)
-    references = []
-    for reference in all_references:
-        if os.path.isfile(os.path.join(app.config["REFERENCES_PATH"], reference)):
-            references.append(reference)
-    references.sort()
-
+    references = get_files(os.path.join(app.config["REFERENCES_PATH"]))
     return render_template("references.html", references=references)
 
 @app.route("/references/<path:reference>")
@@ -166,5 +125,13 @@ def server_error(error):
     return "Something bad happened and you should tell Michael to look into it"
 
 '''helper functions'''
-def get_files(path):
-    pass
+def get_files(base_path, child=''):
+    all_files = os.listdir(os.path.join(base_path,child))
+    actual_files = []
+
+    for potential_file in all_files:
+        if os.path.isfile(os.path.join(base_path,child,potential_file)):
+            actual_files.append(potential_file)
+
+    actual_files.sort()
+    return actual_files
