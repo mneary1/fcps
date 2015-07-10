@@ -67,7 +67,7 @@ def upload():
             full_path = os.path.join(full_path, filename)
             form.upload.data.save(full_path)
             flash("successfully uploaded " + filename, "success")
-            return redirect("/")
+            return redirect("/upload")
         else:
             flash("no file chosen","error")
             return redirect("/upload")
