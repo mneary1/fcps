@@ -59,7 +59,7 @@ def upload():
             if ext not in app.config["ALLOWED_EXTENSIONS"]:
                 flash("file extension ." + ext + " is not a supported upload type", "error")
                 return redirect("/upload")
-            full_path = os.path.join(app.config['UPLOAD_PATH'],current_user.username)
+            full_path = os.path.join(app.config['UPLOAD_PATH'],current_user.firstname)
 
             #make the user's upload directory if it doesn't exist
             if not os.path.exists(full_path):
@@ -73,7 +73,7 @@ def upload():
             flash("no file chosen","error")
             return redirect("/upload")
     
-    uploads = get_files(app.config['UPLOAD_PATH'], current_user.username)
+    uploads = get_files(app.config['UPLOAD_PATH'], current_user.firstname)
     return render_template("upload.html",form=form, uploads=uploads)
 
 @app.route("/readings/")
