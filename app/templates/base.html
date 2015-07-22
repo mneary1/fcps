@@ -17,10 +17,7 @@
             <ul class="nav navbar-nav">
                 {% if current_user.is_authenticated() %}
                 <li>
-                  <a href="#">Hi, {{current_user.username}}!</a>
-                </li>
-                <li> 
-                    <a href="/logout">Logout</a> 
+                  <a href="#">Hi, {{current_user.firstname}}!</a>
                 </li>
                 <li {%if request.path == "/upload/"%}class="active"{%endif%}>
                     <a href="/upload">Upload</a>
@@ -34,7 +31,10 @@
                 <li {%if request.path == "/references/"%}class="active"{%endif%}>
                     <a href="/references">References</a>
                 </li>
-                {%else%}
+                <li> 
+                    <a href="/logout">Logout</a> 
+                </li>
+		{%else%}
                 <li {%if request.path == "/login"%}class="active"{%endif%}> 
                     <a href="/login"> Login </a> 
                 </li>
