@@ -1,66 +1,67 @@
-{% extends "bootstrap/base.html" %}
-
-{% block styles %}
-{{super()}}
-    <link rel="stylesheet" href="{{url_for('.static', filename='base.css')}}">
-{% endblock %}
-
-{% block title %}FCPS Seattle 2015{% endblock %}
-
-{% block navbar %}
-<div class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/home">FCPS</a>
-        </div>
-        <div>
-            <ul class="nav navbar-nav">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FCPS Seattle 2015</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!--Bootstrap Javascript-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!--Base CSS-->
+    <link rel="stylesheet" href="{{url_for('.static', filename='base.css')}}"/>
+</head>
+<body>
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/home">FCPS</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
                 {% if current_user.is_authenticated() %}
                 <li>
-                  <a href="#">Hi, {{current_user.username}}!</a>
+                <a href="#">Hi, {{current_user.username}}!</a>
                 </li>
                 <li> 
-                    <a href="/logout">Logout</a> 
+                <a href="/logout">Logout</a> 
                 </li>
                 <li {%if request.path == "/upload/"%}class="active"{%endif%}>
-                    <a href="/upload">Upload</a>
+                <a href="/upload">Upload</a>
                 </li>
                 <li {%if request.path == "/readings/"%}class="active"{%endif%}>
-                    <a href="/readings">Readings</a> 
+                <a href="/readings">Readings</a> 
                 </li>
                 <li {%if request.path == "/assignments/"%}class="active"{%endif%}>
-                    <a href="/assignments">Assignments</a>
+                <a href="/assignments">Assignments</a>
                 </li>
                 <li {%if request.path == "/references/"%}class="active"{%endif%}>
-                    <a href="/references">References</a>
+                <a href="/references">References</a>
                 </li>
                 {%else%}
                 <li {%if request.path == "/login"%}class="active"{%endif%}> 
-                    <a href="/login"> Login </a> 
+                <a href="/login"> Login </a> 
                 </li>
                 {%endif%}
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
-{%with messages=get_flashed_messages(with_categories=true)%}
-     {%if messages%}
-<div>
-       {%for category, message in messages%}
-         {%if category == 'error'%}
-            <div class="alert alert-danger" role="alert">{{message}}</div>
-         {%elif category == 'success'%}
-            <div class="alert alert-success" role="alert">{{message}}</div>
-         {%endif%}
-        {%endfor%}
-</div>
-      {%endif%}
-   {%endwith%}
-{% endblock %}
+    {%with messages=get_flashed_messages(with_categories=true)%}
+    {%if messages%}
+    <div>
+    {%for category, message in messages%}
+    {%if category == 'error'%}
+    <div class="alert alert-danger" role="alert">{{message}}</div>
+    {%elif category == 'success'%}
+    <div class="alert alert-success" role="alert">{{message}}</div>
+    {%endif%}
+    {%endfor%}
+    </div>
+    {%endif%}
+    {%endwith%}
 
-{% block content %}
-<div class="jumbotron container" id="welcome">
+    {% block content %}
+    <div class="jumbotron container" id="welcome">
     <h1> FCPS 2015 </h1> 
     <p>Welcome to Fundamentals of Computer Science at CTY Seattle!</p>
     <p>Click <a href="http://bit.ly/1LQW9Oq">here</a> to take a music survey.</p>
@@ -75,5 +76,7 @@
     <!--<img src="https://i.imgur.com/l3aFizL.jpg"/>-->
     <!--<img src="http://imgs.xkcd.com/comics/in_ur_reality.png"/>-->
     <img src="http://i.stack.imgur.com/YryhF.jpg"/>
-</div>
-{% endblock %}
+    </div>
+    {% endblock %}
+</body>
+</html>

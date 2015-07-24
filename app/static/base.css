@@ -11,7 +11,11 @@ form {
   margin-left: 35%
 }
 
-form #submit {
+form > input {
+  margin-top: 15px;
+}
+
+ form #submit {
 	float: right;
 }
 
