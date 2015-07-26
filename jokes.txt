@@ -1,0 +1,11 @@
+    <!--<img src="{{url_for("static",filename="hobbyte.jpeg")}}">-->
+    <!---<p>Why do computer scientists always mix up Halloween and Christmas?</p>
+    <p>Because Oct 31 == Dec 25</p>-->
+    <!--<p>A programmer is at work when their spouse calls and asks them to go to the store. "Buy a gallon of milk, and if the store has fresh eggs, buy a dozen," they said. The programmer comes home with 12 gallons of milk.</p>-->
+    <!--<p>Two bytes see each other on the morning train ride to work. One says to the other, "Are you feeling alright? You look ill." They reply, "I don't know. I'm feeling a bit off."</p>-->
+    <!--<img src="http://imgs.xkcd.com/comics/1_to_10.png"/>-->
+    <!--<img src="http://imgs.xkcd.com/comics/compiling.png"/>-->
+    <!--<img src="https://i.imgur.com/l3aFizL.jpg"/>-->
+    <!--<img src="http://imgs.xkcd.com/comics/in_ur_reality.png"/>-->
+    <img src="http://i.stack.imgur.com/YryhF.jpg"/>
+    <img src="http://imgs.xkcd.com/comics/python.png"></img>
