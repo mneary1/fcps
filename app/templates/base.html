@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FCPS Seattle 2015</title>
+    <title>FCPS</title>
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!--Bootstrap Javascript-->
@@ -17,7 +17,7 @@
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                {% if current_user.is_authenticated() %}
+                {% if current_user.is_authenticated %}
                 <li>
                   <a href="#">Hi, {{current_user.firstname}}!</a>
                 </li>
@@ -25,7 +25,7 @@
                 <a href="/upload">Upload</a>
                 </li>
                 <li {%if request.path == "/readings/"%}class="active"{%endif%}>
-                <a href="/readings">Readings</a> 
+                <a href="/readings">Readings</a>
                 </li>
                 <li {%if request.path == "/assignments/"%}class="active"{%endif%}>
                 <a href="/assignments">Assignments</a>
@@ -33,12 +33,12 @@
                 <li {%if request.path == "/references/"%}class="active"{%endif%}>
                 <a href="/references">References</a>
                 </li>
-                <li> 
-                    <a href="/logout">Logout</a> 
+                <li>
+                    <a href="/logout">Logout</a>
                 </li>
 		{%else%}
-                <li {%if request.path == "/login"%}class="active"{%endif%}> 
-                <a href="/login"> Login </a> 
+                <li {%if request.path == "/login"%}class="active"{%endif%}>
+                <a href="/login"> Login </a>
                 </li>
                 {%endif%}
                 </ul>
@@ -55,6 +55,8 @@
     {%elif category == 'success'%}
     <div class="alert alert-success" role="alert">{{message}}</div>
     {%endif%}
+    {%else%}
+    <div class="alert" role="alert">{{category}} | {{message}}</div><br>
     {%endfor%}
     </div>
     {%endif%}
@@ -62,8 +64,8 @@
 
     {% block content %}
     <div class="jumbotron container" id="welcome">
-    <h1> FCPS 2015 </h1> 
-    <p>Welcome to Fundamentals of Computer Science at CTY Seattle!</p>
+    <h1> FCPS 2018 </h1>
+    <p>Welcome to Fundamentals of Computer Science at CTY Carlisle!</p>
     <!--<p>Click <a href="http://bit.ly/1LQW9Oq">here</a> to take a music survey.</p>-->
     <p>Joke of the day:</p>
     <img src="http://imgs.xkcd.com/comics/python.png"></img>
