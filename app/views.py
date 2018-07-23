@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, session, url_for, request, send_from_directory, abort
-from flask.ext.login import login_user, logout_user, current_user, login_required 
+from flask_login import login_user, logout_user, current_user, login_required 
 from app import app, db, lm
 from werkzeug import secure_filename
 from .forms import LoginForm, UploadForm
@@ -124,6 +124,7 @@ def page_not_found(error):
 
 @app.errorhandler(500)
 def server_error(error):
+    #TODO: More robust error logging is needed. 
     return "Something bad happened and you should tell Michael to look into it"
 
 '''helper functions'''
