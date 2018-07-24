@@ -3,7 +3,6 @@
 *__pycache__*
 tmp
 db_repository
-db_*
 app.db
 readings
 fcps-site-env
