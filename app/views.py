@@ -17,7 +17,7 @@ def index():
 def login():
     form = LoginForm()
 
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         flash("You're already logged in, " + current_user.username + "!")
         return redirect('/')
     
