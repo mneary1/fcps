@@ -50,29 +50,31 @@ def load_user(id):
 @login_required
 def upload():
     form = UploadForm()
- 
-    if request.method == 'POST':
-        filename = secure_filename(form.upload.data.filename)
-        if filename and "." in filename:
-            ext = filename.split(".")[1]
-            ext = ext.lower()
-            if ext not in app.config["ALLOWED_EXTENSIONS"]:
-                flash("file extension ." + ext + " is not a supported upload type", "error")
-                return redirect("/upload")
-            full_path = os.path.join(app.config['UPLOAD_PATH'],current_user.firstname)
+    if form.validate_on_submit() and 'upload' in request.files:
 
-            #make the user's upload directory if it doesn't exist
-            if not os.path.exists(full_path):
-                os.makedirs(full_path)
+        for f in request.files.getlist('upload'):
 
-            full_path = os.path.join(full_path, filename)
-            form.upload.data.save(full_path)
-            flash("successfully uploaded " + filename, "success")
-            return redirect("/upload")
-        else:
-            flash("no file chosen","error")
-            return redirect("/upload")
-    
+            filename = secure_filename(f.filename)
+            if filename and "." in filename:
+
+                ext = filename.split(".")[1]
+                ext = ext.lower()
+
+                #make sure the file extension is allowed
+                if ext not in app.config["ALLOWED_EXTENSIONS"]:
+                    msg = "extension ." + ext + " is not a supported upload type"
+                    flash(msg, "error")
+                    continue
+
+                #make sure that the path to upload to exists
+                full_path = os.path.join(app.config['UPLOAD_PATH'], current_user.firstname)
+                if not os.path.exists(full_path):
+                    os.makedirs(full_path)
+
+                #save the current file that was uploaded
+                f.save(os.path.join(full_path, filename))
+                flash("successfully uploaded " + filename, "success")
+
     uploads = get_files(app.config['UPLOAD_PATH'], current_user.firstname)
     return render_template("upload.html",form=form, uploads=uploads)
 
