@@ -8,7 +8,7 @@
 				<tbody>
 				{%if uploads%}
 				{%for upload in uploads%}
-				<tr><td>{{upload}}</td></tr>
+				<tr><td><a href="{{current_user.firstname}}/{{upload}}">{{upload}}</td></tr>
 				{%endfor%}
 				{%else%}
 				<tr><td>Nothing yet... you better get to work!</td></tr>

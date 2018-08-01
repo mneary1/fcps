@@ -76,8 +76,15 @@ def upload():
                 flash("successfully uploaded " + filename, "success")
 
     uploads = get_files(app.config['UPLOAD_PATH'], current_user.firstname)
-    return render_template("upload.html",form=form, uploads=uploads)
+    return render_template("upload.html", form=form, uploads=uploads)
 
+@app.route("/upload/<firstname>/<filename>")
+def send_upload(firstname, filename):
+    path = os.path.join(app.config['UPLOAD_PATH'], current_user.firstname)
+    if os.path.exists(path):
+        return send_from_directory(path, filename)
+    return abort(404)
+    
 @app.route("/readings/")
 def readings():
     path = app.config["READINGS_PATH"]
