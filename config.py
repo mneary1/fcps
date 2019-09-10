@@ -13,3 +13,4 @@ UPLOAD_PATH = os.path.join(basedir, 'uploads')
 READINGS_PATH = os.path.join(basedir,"app","static","readings")
 ASSIGNMENTS_PATH = os.path.join(basedir,"app","static","assignments")
 REFERENCES_PATH = os.path.join(basedir,"app","static","references")
+FLASK_ADMIN_SWATCH = 'superhero'
